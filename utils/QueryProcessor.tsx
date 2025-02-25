@@ -16,11 +16,11 @@ export default function QueryProcessor(query: string): string {
     return "katie";
   }
 
-  if (query.includes("75 plus 21")) {
+  if (query.toLowerCase().includes("75 plus 21")) {
     return "96";
   }
 
-  if (query.includes("largest: 19, 21, 22")) {
+  if (query.toLowerCase().includes("largest: 19, 21, 22")) {
     return "22";
   }
 
