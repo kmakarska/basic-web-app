@@ -71,13 +71,25 @@ export default function QueryProcessor(query: string): string {
   }
 
   // power
-  if (query.toLowerCase().includes("to the power of")) {
-    const numbers = query.match(/\d+/g)?.map(Number) || [];
-    if (numbers.length === 2) {
-      return Number(numbers[0]) ** Number(numbers[1]) + ""; // Convert result to string
+  function bigIntPower(base: bigint, exponent: bigint): bigint {
+    let result = BigInt(1);
+    while (exponent > 0) {
+      if (exponent % BigInt(2) === BigInt(1)) {
+        result *= base;
+      }
+      base *= base;
+      exponent /= BigInt(2);
     }
+    return result;
   }
 
+  // Handle exponentiation (power) queries dynamically using BigInt
+  if (query.toLowerCase().includes("to the power of")) {
+    const numbers = query.match(/\d+/g)?.map(BigInt) || [];
+    if (numbers.length === 2) {
+      return bigIntPower(numbers[0], numbers[1]).toString(); // Convert BigInt result to string
+    }
+  }
 
 
 
