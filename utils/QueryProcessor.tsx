@@ -70,6 +70,14 @@ export default function QueryProcessor(query: string): string {
     return primeNumbers.join(", ") || "None";
   }
 
+  // power
+  if (query.toLowerCase().includes("to the power of")) {
+    const numbers = query.match(/\d+/g)?.map(Number) || [];
+    if (numbers.length === 2) {
+      return Number(numbers[0]) ** Number(numbers[1]) + ""; // Convert result to string
+    }
+  }
+
 
 
 
