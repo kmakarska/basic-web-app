@@ -16,8 +16,11 @@ export default function QueryProcessor(query: string): string {
     return "katie";
   }
 
-  if (query.toLowerCase().includes("75 plus 21")) {
-    return "96";
+  if (query.toLowerCase().includes("plus")) {
+    const numbers = query.match(/\d+/g)?.map(Number) || [];
+    if (numbers.length === 2) {
+      return (numbers[0] + numbers[1]).toString();
+    }
   }
 
   if (query.toLowerCase().includes("largest")) {
