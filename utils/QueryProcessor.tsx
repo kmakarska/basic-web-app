@@ -30,6 +30,16 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+  if (query.toLowerCase().includes("both a square and a cube")) {
+    const numbers = query.match(/\d+/g)?.map(Number) || [];
+    const perfectSixthPowers = numbers.filter(num => {
+      const root = Math.round(num ** (1 / 6)); // Check sixth root
+      return root ** 6 === num;
+    });
+
+    return perfectSixthPowers.join(", ") || "None";
+  }
+
 
   return "";
 }
